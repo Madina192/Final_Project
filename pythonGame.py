@@ -19,9 +19,13 @@ class Ball(GameObject):
         self.radius = 10
         self.direction = [1, -1]
         self.speed = 10
-        item = canvas.create_oval(x-self.radius, y-self.radius,
-                                  x+self.radius, y+self.radius,
-                                  fill='white')
+        item = canvas.create_oval(
+            x-self.radius,
+            y-self.radius,
+            x+self.radius,
+            y+self.radius,
+            fill='white'
+        )
         super(Ball, self).__init__(canvas, item)
 
     def update(self):
@@ -59,11 +63,13 @@ class Paddle(GameObject):
         self.width = 80
         self.height = 10
         self.ball = None
-        item = canvas.create_rectangle(x - self.width / 2,
-                                       y - self.height / 2,
-                                       x + self.width / 2,
-                                       y + self.height / 2,
-                                       fill='blue')
+        item = canvas.create_rectangle(
+            x - self.width / 2,
+            y - self.height / 2,
+            x + self.width / 2,
+            y + self.height / 2,
+            fill='blue'
+        )
         super(Paddle, self).__init__(canvas, item)
 
     def set_ball(self, ball):
@@ -84,11 +90,14 @@ class Brick(GameObject):
         self.height = 20
         self.hits = hits
         color = Brick.COLORS[hits]
-        item = canvas.create_rectangle(x - self.width / 2,
-                                       y - self.height / 2,
-                                       x + self.width / 2,
-                                       y + self.height / 2,
-                                       fill=color, tags='brick')
+        item = canvas.create_rectangle(
+            x - self.width / 2,
+            y - self.height / 2,
+            x + self.width / 2,
+            y + self.height / 2,
+            fill=color,
+            tags='brick'
+        )
         super(Brick, self).__init__(canvas, item)
     def hit(self):
         self.hits -= 1
@@ -148,8 +157,7 @@ class Game(tk.Frame):
 
     def draw_text(self, x, y, text, size='40'):
         font = ('Helvetica', size)
-        return self.canvas.create_text(x, y, text=text,
-                                       font=font)
+        return self.canvas.create_text(x, y, text=text, font=font)
     def update_lives_text(self):
         text = 'Lives: %s' % self.lives
         if self.hud is None:
