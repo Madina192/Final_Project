@@ -22,22 +22,28 @@ label.image = logo
 label.place(x=620, y=20)
 
 def open_file():
-    file = ImageTk.PhotoImage(
+    try:
+        file = ImageTk.PhotoImage(
         Image.open(entry_window.get().replace('"', '')).resize((100, 100))
         )
-    disp_img.config(image=file)
-    disp_img.image = file
-    disp_img.place(x=150, y=80)
-
+        disp_img.config(image=file)
+        disp_img.image = file
+        disp_img.place(x=150, y=80)
+    except FileNotFoundError:
+        pass
+        
 def resize_func():
-    image = Image.open(entry_window.get().replace('"', ''))
-    w = int(width.get())
-    h = int(height.get())
-    resize_img = image.resize((w, h))
-    img = ImageTk.PhotoImage(resize_img)
-    disp_img.config(image=img)
-    disp_img.image = img
-    disp_img.place(x=150, y=80)
+    try:
+        image = Image.open(entry_window.get().replace('"', ''))
+        w = int(width.get())
+        h = int(height.get())
+        resize_img = image.resize((w, h))
+        img = ImageTk.PhotoImage(resize_img)
+        disp_img.config(image=img)
+        disp_img.image = img
+        disp_img.place(x=150, y=80)
+    except FileNotFoundError:
+        pass
 
 btn_check = Button(ws, text="Open", command=open_file, bg='#FF33FF')
 btn_check.place(x=210, y=20)
